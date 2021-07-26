@@ -1,0 +1,28 @@
+bool bipartite(list<int> *adj,V &vis,int i,V &v)
+{
+    if(vis[i]==1)
+    {
+        return 1;
+    }
+    vis[i]=1;
+    if(v[i]==0)
+    {
+        v[i]=1;
+    }
+    for(auto it=adj[i].begin();it!=adj[i].end();it++)
+    {
+        if(v[*it]==0)
+        {
+            v[*it]=3-v[i];
+        }
+        else if(v[*it]==v[i])
+        {
+            return 0;
+        }
+        if(!bipartite(adj,vis,*it,v))
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
